@@ -4,3 +4,4 @@
 # KEEP THIS FILE SORTED. Order is important. Last match takes precedence.
 
 /.github/                              @cvjt
+/docs/                                 @cvjt                    
