@@ -1,4 +1,4 @@
-# ContinuousEngineeringPlatform
+# Continuous Engineering Platform (cePlatform)
 
 ![Continuous Engineering Project logo](docs/static_files/ce-project-logo.png "The Continuous Engineering Project")
 

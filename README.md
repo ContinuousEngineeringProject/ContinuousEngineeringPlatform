@@ -1,3 +1,3 @@
-# ContinuousEngineeringPlatform
+# Continuous Engineering Platform (cePlatform)
 
 
