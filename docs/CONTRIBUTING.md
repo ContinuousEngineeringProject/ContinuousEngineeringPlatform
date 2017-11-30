@@ -19,11 +19,11 @@ This section gives the experienced contributor some tips and guidelines.
 
 Not sure if that typo is worth a pull request? Found a bug and know how to fix it? Do it! We will appreciate it. Any significant improvement should be documented as [a GitHub issue](https://github.com/ContinuousEngineeringProject/ContinuousEngineeringPlatform/issues) before anybody starts working on it.
 
-We are always thrilled to receive pull requests. We do our best to process them quickly. If your pull request is not accepted on the first try, don't get discouraged! Our contributor's guide explains [the review process we use for simple changes](https://docs.docker.com/opensource/workflow/make-a-contribution/).
+We are always thrilled to receive pull requests. We do our best to process them quickly. If your pull request is not accepted on the first try, don't get discouraged!
 
 ### Design and cleanup proposals
 
-You can propose new designs for existing features. You can also design entirely new features. We really appreciate contributors who want to refactor or otherwise cleanup our project. For information on making these types of contributions, see [the advanced contribution section](https://docs.docker.com/opensource/workflow/advanced-contributing/) in the contributors guide.
+You can propose new designs for existing features. You can also design entirely new features. We really appreciate contributors who want to refactor or otherwise cleanup our project.
 
 ### Conventions
 
