@@ -1,30 +1,39 @@
-<!--
-Please make sure you've read and understood our contributing guidelines;
-https://github.com/moby/moby/blob/master/CONTRIBUTING.md
+NAMING YOUR PULL REQUEST: Please prefix your PR with the name of the sub-project e.g. `tag-expressions: Refactor checks`. This makes it easier to get some context when reading the names of issues
 
-** Make sure all your commits include a signature generated with `git commit -s` **
+These sections are meant as guidance for you. If something doesn't fit, you can just skip it.
 
-For additional information on our contributing process, read our contributing
-guide https://docs.docker.com/opensource/code/
+## Summary
 
-If this is a bug fix, make sure your description includes "fixes #xxxx", or
-"closes #xxxx"
+Provide a general summary description of your changes
 
-Please provide the following information:
--->
+## Details
 
-**- What I did**
+Describe your changes in detail
 
-**- How I did it**
+## Motivation and Context
 
-**- How to verify it**
+Why is this change required? What problem does it solve? If it fixes an open issue, please link to the issue here.
 
-**- Description for the changelog**
-<!--
-Write a short (one line) summary that describes the changes in this
-pull request for inclusion in the changelog:
--->
+## How Has This Been Tested?
 
+Please add tests for changes to the code, otherwise we probably won't merge it.
 
-**- A picture of a cute animal (not mandatory but encouraged)**
+Please describe in detail how you tested your changes. Include details of your testing environment, tests ran to see how your change affects other areas of the code, etc.
 
+## Screenshots (if appropriate):
+
+## Types of changes
+
+What types of changes does your code introduce? Put an `x` in all the boxes that apply:
+
+- [ ] Bug fix (non-breaking change which fixes an issue).
+- [ ] New feature (non-breaking change which adds functionality).
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected).
+
+## Checklist:
+
+Go over all the following points, and put an `x` in all the boxes that apply. If you're unsure about any of these, don't hesitate to ask. We're here to help!
+
+- [ ] I've added tests for my code.
+- [ ] My change requires a change to the documentation.
+- [ ] I have updated the documentation accordingly.

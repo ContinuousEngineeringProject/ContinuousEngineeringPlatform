@@ -1,70 +1,60 @@
-<!--
-If you are reporting a new issue, make sure that we do not have any duplicates
-already open. You can ensure this by searching the issue list for this
-repository. If there is a duplicate, please close your issue and add a comment
-to the existing issue instead.
+NAMING YOUR ISSUE: Please prefix your issue with the name of the sub-project e.g. `event-protocol: Schemas out of date`. This makes it easier to get some context when reading the names of issues
 
-If you suspect your issue is a bug, please edit your issue description to
-include the BUG REPORT INFORMATION shown below. If you fail to provide this
-information within 7 days, we cannot debug your issue and will close it. We
-will, however, reopen it if you later provide the information.
+These sections are meant as guidance for you, to help you give the kind of information we'll need to help with your issue. If a section  doesn't seem to fit, just skip it.
 
-For more information about reporting issues, see
-https://github.com/moby/moby/blob/master/CONTRIBUTING.md#reporting-other-issues
+In general: Please provide as much information as you can to help us solving your problem
 
----------------------------------------------------
-GENERAL SUPPORT INFORMATION
----------------------------------------------------
+## Summary
 
-The GitHub issue tracker is for bug reports and feature requests.
-General support for **docker** can be found at the following locations:
+Provide a general summary description of the issue
 
-- Docker Support Forums - https://forums.docker.com
-- Slack - community.docker.com #general channel
-- Post a question on StackOverflow, using the Docker tag
+## Expected Behavior
 
-General support for **moby** can be found at the following locations:
+If you're describing a bug, tell us what should happen
 
-- Moby Project Forums - https://forums.mobyproject.org
-- Slack - community.docker.com #moby-project channel
-- Post a question on StackOverflow, using the Moby tag
+If you're suggesting a change/improvement, tell us how it should work
 
----------------------------------------------------
-BUG REPORT INFORMATION
----------------------------------------------------
-Use the commands below to provide key information from your environment:
-You do NOT have to include this information if this is a FEATURE REQUEST
--->
+Feel free to use Given / Then / Then if that helps, but please add some plain-language context too
 
-**Description**
+## Current Behavior
 
-<!--
-Briefly describe the problem you are having in a few paragraphs.
--->
+If describing a bug, tell us what happens instead of the expected behavior.
 
-**Steps to reproduce the issue:**
+If suggesting a change/improvement, explain the difference from current behavior.
+
+~~~
+
+~~~
+
+## Possible Solution
+
+Not obligatory, but suggest a fix/reason for the bug, or ideas how to implement the addition or change
+
+~~~
+
+~~~
+
+## Steps to Reproduce (for bugs)
+
+Provide a link to a live example, or an unambiguous set of steps to reproduce this bug. Include code to reproduce, if relevant.
+
 1.
 2.
 3.
+4.
 
-**Describe the results you received:**
+~~~
 
+~~~
 
-**Describe the results you expected:**
+## Context & Motivation
 
+How has this issue affected you? What are you trying to accomplish? Providing context helps us come up with a solution that is most useful in the real world
 
-**Additional information you deem important (e.g. issue happens only occasionally):**
+## Your Environment
 
-**Output of `cep version`:**
+If you're reporting a bug, include as many relevant details about the environment you experienced the bug in.
 
-```
-(paste your output here)
-```
-
-**Output of `cep info`:**
-
-```
-(paste your output here)
-```
-
-**Additional environment details (AWS, VirtualBox, physical, etc.):**
+* Version used:
+* Operating System and version:
+* Link to your project:
