@@ -1,0 +1,5 @@
+FROM golang:1.9.2-alpine3.6
+
+WORKDIR /go/src/
+COPY src/github.com/ContinuousEngineeringProject/cePlatform .
+
