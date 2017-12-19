@@ -1,4 +1,4 @@
-package docker
+package bash
 
 import "testing"
 

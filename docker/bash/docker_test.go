@@ -1,4 +1,4 @@
-package node
+package bash
 
 import "testing"
 
