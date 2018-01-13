@@ -18,59 +18,61 @@ type ArgsCreateNode struct {
 
 // DmCreate will create a node using docker-machine
 //
-func DmCreate(options ArgsCreateNode, nodeName string) {
+func DmCreate(options ArgsCreateNode, nodeName string) (status string){
 	dCmd := "create"
-
 	// Build arguments based on specified driver
 	switch options.DRIVER {
 	case "virtualbox":
 		dCmdAgrs := []string{dCmd, "-d", options.DRIVER, "--virtualbox-memory", options.MEMORY, "--virtualbox-cpu-count", options.CPU, nodeName}
 		fmt.Fprintln(os.Stderr, "Creating node "+nodeName+"...")
 		runBashCmd(exec.Command(cmdName, dCmdAgrs...))
+		// TODO: Refactor DmCreate to use actual docker-machine status
+		status = "RUNNING"
 		fmt.Fprintln(os.Stderr, "Node "+nodeName+" created")
 	default:
 		// Throw unknown driver error
+		status = "ERROR"
 		fmt.Fprintln(os.Stderr, "Error unknown driver", options.DRIVER)
 	}
-	//TODO: Return the created node status
-	return
+	return status
 }
 
 // DmRemove will remove a node
 //
-func DmRemove(nodeName string) {
+func DmRemove(nodeName string) (status string){
 	dCmd := "rm"
 	dCmdAgrs := []string{dCmd, nodeName, "--force"}
 
 	fmt.Fprintln(os.Stderr, "Removing node "+nodeName+"...")
 	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" removed")
-	//TODO: Return the node status
-	return
+	// TODO: Refactor DmRemove to use docker-machine to confirm node does not exist
+	return "REMOVED"
 }
 
 // DmStop will stop a running node
 //
-func DmStop(nodeName string) {
+func DmStop(nodeName string) (status string){
 	dCmd := "stop"
 	dCmdAgrs := []string{dCmd, nodeName}
 
 	fmt.Fprintln(os.Stderr, "Stoping node "+nodeName+"...")
 	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" stopped")
-	//TODO: Return the node status
-	return
+	// TODO: Refactor DmStop to use actual docker-machine status
+	return "STOPPED"
 }
 
 // DmStart will start a stopped node
 //
-func DmStart(nodeName string) {
+func DmStart(nodeName string) (status string){
 	dCmd := "start"
 	dCmdAgrs := []string{dCmd, nodeName}
 
 	fmt.Fprintln(os.Stderr, "Starting node "+nodeName+"...")
 	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" started")
-	//TODO: Return the node status
-	return
+	// TODO: Refactor DmStart to use actual docker-machine status
+	return "RUNNING"
 }
+

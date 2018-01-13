@@ -7,57 +7,63 @@ import (
 	"strconv"
 )
 
+type ListNodeStatus struct {
+	NODE string
+	STATUS string
+}
+
 // CreateNodes will create multiple nodes
 //
-func CreateNodes(nodeArgs bash.ArgsCreateNode) {
+func CreateNodes(nodeArgs bash.ArgsCreateNode) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Creating "+strconv.Itoa(nodeArgs.COUNT)+" nodes")
 
+	nodesStatus = make([]ListNodeStatus,nodeArgs.COUNT)
 	if nodeArgs.COUNT > 0 {
-		for node := 1; node <= nodeArgs.COUNT; node++ {
-			nodeName := nodeArgs.PREFIX+strconv.Itoa(node)
-			bash.DmCreate(nodeArgs, nodeName)
+		//Populate node names
+		for n := 0; n < nodeArgs.COUNT; n++ {
+			nodesStatus[n].NODE = nodeArgs.PREFIX + strconv.Itoa(n+1)
+		}
+		//Create the nodes & report status
+		for n := 0; n < len(nodesStatus); n++ {
+			nodesStatus[n].STATUS = bash.DmCreate(nodeArgs, nodesStatus[n].NODE)
 		}
 	} else {
 		fmt.Fprintln(os.Stderr, "Error Creating node: "+strconv.Itoa(nodeArgs.COUNT)+" is an invalid number of nodes")
+		nodesStatus[0].NODE = "NODE_COUNT"
+		nodesStatus[0].STATUS = "INVALID"
 	}
-	//TODO: Return the created nodes statuses
-	return
+	return nodesStatus
 }
 
 // StopNodes will stop multiple nodes
 //
-func StopNodes(nodeNames []string) {
+func StopNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Stopping "+strconv.Itoa(len(nodeNames))+" nodes")
 
-	for node := 0; node <= len(nodeNames)-1; node++ {
+	for node := 0; node < len(nodeNames); node++ {
 		bash.DmStop(nodeNames[node])
 	}
-	//TODO: Return the nodes statuses
-	return
+	return nodesStatus
 }
 
 // StartNodes will start multiple stopped nodes
 //
-func StartNodes(nodeNames []string){
+func StartNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Starting "+strconv.Itoa(len(nodeNames))+" nodes")
 
-	for node := 0; node <= len(nodeNames)-1; node++ {
+	for node := 0; node < len(nodeNames); node++ {
 		bash.DmStart(nodeNames[node])
 	}
-	//TODO: Return the nodes statuses
-	return
+	return nodesStatus
 }
 
 // RemoveNodes will start multiple stopped nodes
 //
-func RemoveNodes(nodeNames []string){
+func RemoveNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Removing "+strconv.Itoa(len(nodeNames))+" nodes")
 
-	for node := 0; node <= len(nodeNames)-1; node++ {
+	for node := 0; node < len(nodeNames); node++ {
 		bash.DmRemove(nodeNames[node])
 	}
-	//TODO: Return the nodes statuses
-	return
+	return nodesStatus
 }
-
-

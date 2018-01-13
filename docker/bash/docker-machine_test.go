@@ -2,45 +2,50 @@ package bash
 
 import "testing"
 
-// test data - node
-const mName = "manager"
-const mDriver = "virtualbox"
-const mMemory = "1024"
-const mCPU = "1"
-const mCount = 1
-
-func TestCreateNode(t *testing.T) {
-	// Set test data
-	testData := ArgsCreateNode{mName, mDriver, mMemory, mCPU, mCount}
-
-	DmCreate(testData)
-
-	// TODO: Complete DmCreate test
+func createTestNodeData() []ArgsCreateNode {
+	var argsTestNodes = []ArgsCreateNode{
+		{"TestVBNode1","virtualbox","1024","1",1},
+//		{"TestVBNode2","virtualbox","1024","1",1},
+	}
+	return argsTestNodes
 }
 
-func TestRemoveNode(t *testing.T) {
-	// Set test data
-	testData := ArgsCreateNode{mName, mDriver, mMemory, mCPU, mCount}
-
-	DmRemove(testData.PREFIX + "1")
-
-	// TODO: Complete DmRemove test
+func TestDmCreate(t *testing.T) {
+	testNodeData := createTestNodeData()
+	for node := 0; node < len(testNodeData); node++ {
+		status := DmCreate(testNodeData[node], testNodeData[node].PREFIX)
+		if status != "RUNNING" {
+			t.Error("For", testNodeData[node].PREFIX, "expected RUNNING got", status,)
+		}
+	}
 }
 
-func TestStartNode(t *testing.T) {
-	// Set test data
-	testData := ArgsCreateNode{mName, mDriver, mMemory, mCPU, mCount}
-
-	DmStart(testData.PREFIX + "1")
-
-	// TODO: Complete DmStart test
+func TestDmStop (t *testing.T) {
+	testNodeData := createTestNodeData()
+	for node := 0; node < len(testNodeData); node++ {
+		status := DmStop(testNodeData[node].PREFIX)
+		if status != "STOPPED" {
+			t.Error("For", testNodeData[node].PREFIX, "expected STOPPED got", status,)
+		}
+	}
 }
 
-func TestStopNode(t *testing.T) {
-	// Set test data
-	testData := ArgsCreateNode{mName, mDriver, mMemory, mCPU, mCount}
+func TestDmStart (t *testing.T) {
+	testNodeData := createTestNodeData()
+	for node := 0; node < len(testNodeData); node++ {
+		status := DmStart(testNodeData[node].PREFIX)
+		if status != "RUNNING" {
+			t.Error("For", testNodeData[node].PREFIX, "expected RUNNING got", status,)
+		}
+	}
+}
 
-	DmStop(testData.PREFIX + "1")
-
-	// TODO: Complete DmStop test
+func TestDmRemove (t *testing.T) {
+	testNodeData := createTestNodeData()
+	for node := 0; node < len(testNodeData); node++ {
+		status := DmRemove(testNodeData[node].PREFIX)
+		if status != "REMOVED" {
+			t.Error("For", testNodeData[node].PREFIX, "expected REMOVED got", status,)
+		}
+	}
 }
