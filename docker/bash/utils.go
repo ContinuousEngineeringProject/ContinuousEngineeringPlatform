@@ -7,7 +7,7 @@ import (
 	"os/exec"
 )
 
-func runBashCmd(cmd *exec.Cmd) {
+func runBashCmd (cmd *exec.Cmd) {
 	cmdReader, err := cmd.StdoutPipe()
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error creating StdoutPipe for Cmd:", err)
