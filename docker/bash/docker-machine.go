@@ -35,6 +35,7 @@ func DmCreate(options ArgsCreateNode, nodeName string) (status string){
 		status = "ERROR"
 		fmt.Fprintln(os.Stderr, "Error unknown driver", options.DRIVER)
 	}
+
 	return status
 }
 
@@ -77,14 +78,22 @@ func DmStart(nodeName string) (status string){
 	return "RUNNING"
 }
 
-// DmSSH will ssh to the node
-// and run your specified command on the node
+// DmSSH will ssh to a selected node and run the specified command
+//
 func DmSSH(nodeName string, bashCmd string) (sshOutput string){
-	// TODO: Refactor DmSSH
 	dCmd := "ssh"
 	dCmdArgs := []string{dCmd,nodeName,strconv.Quote(bashCmd)}
-
+	// TODO: Retrieve the output from the command run on the node
 	runBashCmd(exec.Command(cmdName, dCmdArgs...))
 	return "EXEC"
 }
 
+// DmSCP will copy files or directory from / to a node
+//
+func DmSCP(locationSource string, locationDestination string) (scpStatus string){
+	dCmd := "scp"
+	dCmdArgs := []string{dCmd,locationSource, locationDestination}
+	// TODO: Retrieve the output from the command run
+	runBashCmd(exec.Command(cmdName, dCmdArgs...))
+	return "TODO"
+}
