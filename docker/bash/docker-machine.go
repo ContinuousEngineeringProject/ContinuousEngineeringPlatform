@@ -88,12 +88,17 @@ func DmSSH(nodeName string, bashCmd string) (sshOutput string){
 	return "EXEC"
 }
 
-// DmSCP will copy files or directory from / to a node
+// DmSCP will copy files or directories to & from a node
 //
-func DmSCP(locationSource string, locationDestination string) (scpStatus string){
+func DmSCP(locationSource string, locationDestination string, isFile bool) (scpStatus string){
 	dCmd := "scp"
-	dCmdArgs := []string{dCmd,locationSource, locationDestination}
-	// TODO: Retrieve the output from the command run
-	runBashCmd(exec.Command(cmdName, dCmdArgs...))
-	return "TODO"
+	if isFile==true {
+		dCmdArgs := []string{dCmd, locationSource, locationDestination}
+		runBashCmd(exec.Command(cmdName, dCmdArgs...))
+	} else {
+		dCmdArgs := []string{dCmd, "-r", locationSource, locationDestination}
+		runBashCmd(exec.Command(cmdName, dCmdArgs...))
+	}
+	// TODO: Verify that the command ran & Return the the output
+	return "EXEC"
 }

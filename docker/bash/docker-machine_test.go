@@ -83,11 +83,12 @@ func TestDmSSH(t *testing.T) {
 // TestDmSCP will test the DmSCP function
 //
 func TestDmSCP(t *testing.T) {
+	// TODO: Refactor to include multiple source & dest locations
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
 		node := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
 		if node == "RUNNING" {
-			scpStatus := DmSCP("","")
+			scpStatus := DmSCP("./docker-machine_test.go",testNodeData[i].PREFIX+":~",true)
 			if scpStatus != "EXEC" { //TODO: needs to be the expected return value from the ssh
 				t.Error("Failed to scp to", testNodeData[i].PREFIX, "expected EXEC got", scpStatus,)
 			}
