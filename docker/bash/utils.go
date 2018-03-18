@@ -7,11 +7,13 @@ import (
 	"os/exec"
 )
 
-func runBashCmd (cmd *exec.Cmd) {
+func runBashCmd (cmd *exec.Cmd) (status string){
 	cmdReader, err := cmd.StdoutPipe()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "Error creating StdoutPipe for Cmd:", err)
-		os.Exit(1)
+		status = "Error creating StdoutPipe for Cmd:"
+		fmt.Fprintln(os.Stderr, status, err)
+//		os.Exit(1)
+		return status
 	}
 
 	scanner := bufio.NewScanner(cmdReader)
@@ -23,13 +25,17 @@ func runBashCmd (cmd *exec.Cmd) {
 
 	err = cmd.Start()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "Error starting Cmd:", err)
-		os.Exit(1)
+		status = "Error starting Cmd:"
+		fmt.Fprintln(os.Stderr, status, err)
+		return status
 	}
 
 	err = cmd.Wait()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "Error waiting for Cmd:", err)
-		os.Exit(1)
+		status = "Error waiting for Cmd:" + err
+		fmt.Fprintln(os.Stderr, status, err)
+		return status
 	}
+	
+	return
 }

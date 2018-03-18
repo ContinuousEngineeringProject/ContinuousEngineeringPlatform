@@ -102,3 +102,11 @@ func DmSCP(locationSource string, locationDestination string, isFile bool) (scpS
 	// TODO: Verify that the command ran & Return the the output
 	return "EXEC"
 }
+
+// DmStatus will return the status of a node
+//
+func DmStatus(nodeName string) (nodeStatus string){
+
+
+	return "TODO"
+}
