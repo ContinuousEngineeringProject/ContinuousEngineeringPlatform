@@ -1,5 +1,3 @@
-NAMING YOUR ISSUE: Please prefix your issue with the name of the sub-project e.g. `event-protocol: Schemas out of date`. This makes it easier to get some context when reading the names of issues
-
 These sections are meant as guidance for you, to help you give the kind of information we'll need to help with your issue. If a section  doesn't seem to fit, just skip it.
 
 In general: Please provide as much information as you can to help us solving your problem
@@ -14,7 +12,7 @@ If you're describing a bug, tell us what should happen
 
 If you're suggesting a change/improvement, tell us how it should work
 
-Feel free to use Given / Then / Then if that helps, but please add some plain-language context too
+Feel free to use Given / Then / When if that helps, but please add some plain-language context too
 
 ## Current Behavior
 
