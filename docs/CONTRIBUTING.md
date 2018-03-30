@@ -1,9 +1,6 @@
 # Contribute to the Continuous Engineering Platform
 
-Want to hack on the Continuous Engineering Platform? Awesome! We have a contributor's guide that explains
-[setting up a development environment and the contribution process](docs/contributing/). 
-
-This page contains information about reporting issues as well as some tips and guidelines useful to experienced open source contributors.
+Want to hack on the Continuous Engineering Platform? Awesome! This page contains information about reporting issues as well as some tips and guidelines useful to experienced open source contributors.
 
 ## Reporting issues
 
@@ -32,11 +29,9 @@ Fork the repository and make changes on your fork in a feature branch:
 - If it's a bug fix branch, name it XXXX-something where XXXX is the number of the issue. 
 - If it's a feature branch, create an enhancement issue to announce your intentions, and name it XXXX-something where XXXX is the number of the issue.
 
-Submit tests for your changes. See [TESTING.md](./docs/TESTING.md) for details.
+Submit tests for your changes. See [TESTING.md][Testing] for details.
 
-If your changes need integration tests, write them against the API. The `cli` integration tests are slowly either migrated to API tests or moved away as unit tests in `docker/cli` and end-to-end tests for Docker.
-
-Update the documentation when creating or modifying features. Test your documentation changes for clarity, concision, and correctness, as well as a clean documentation build.
+If your changes need integration tests, write them. Update the documentation when creating or modifying features. Test your documentation changes for clarity, concision, and correctness, as well as a clean documentation build.
 
 Write clean code. Universally formatted code promotes ease of writing, reading, and maintenance. Always run `gofmt -s -w file.go` on each changed file before committing your changes. Most editors have plug-ins that do this automatically.
 
@@ -45,8 +40,6 @@ Pull request descriptions should be as clear as possible and include a reference
 ### Successful Changes
 
 Before contributing large or high impact changes, make the effort to coordinate with the maintainers of the project before submitting a pull request. This prevents you from doing extra work that may or may not be merged.
-
-Large PRs that are just submitted without any prior communication are unlikely to be successful.
 
 While pull requests are the methodology for submitting changes to code, changes are much more likely to be accepted if they are accompanied by additional engineering work. While we don't define this explicitly, most of these goals are accomplished through communication of the design goals and subsequent solutions. Often times, it helps to first state the problem before presenting solutions.
 
@@ -80,7 +73,7 @@ Pull requests must be cleanly rebased on top of master without multiple branches
 
 Before you make a pull request, squash your commits into logical units of work using `git rebase -i` and `git push -f`. A logical unit of work is a consistent set of patches that should be reviewed together: for example, upgrading the version of a vendored dependency and taking advantage of its now available new feature constitute two separate units of work. Implementing a new function and calling it in another file constitute a single logical unit of work. The very high majority of submissions should have a single commit, so if in doubt: squash down to one.
 
-After every commit, [make sure the test suite passes](docs/TESTING.md). Include documentation changes in the same pull request so that a revert would remove all traces of the feature or fix.
+After every commit, [make sure the test suite passes][Testing]. Include documentation changes in the same pull request so that a revert would remove all traces of the feature or fix.
 
 Include an issue reference like `Closes #XXXX` or `Fixes #XXXX` in commits that close an issue. Including references automatically closes the issue on a merge.
 
@@ -154,8 +147,8 @@ It is possible that the code base does not currently comply with these guideline
 The rules:
 
 1. All code should be formatted with `gofmt -s`.
-2. All code should pass the default levels of [`golint`](https://github.com/golang/lint).
-3. All code should follow the guidelines covered in [Effective Go](http://golang.org/doc/effective_go.html) and [Go Code Review Comments](https://github.com/golang/go/wiki/CodeReviewComments).
+2. All code should pass the default levels of [`golint`][GoLint].
+3. All code should follow the guidelines covered in [Effective Go][EffectiveGo] and [Go Code Review Comments][CodeReviewComments].
 4. Comment the code. Tell us the why, the history and the context.
 5. Document _all_ declarations and methods, even private ones. Declare expectations, caveats and anything else that may be important. If a type gets exported, having the comments already there will ensure it's ready.
 6. Variable name length should be proportional to its context and no longer. `noCommaALongVariableNameLikeThisIsNotMoreClearWhenASimpleCommentWouldDo`. In practice, short methods will have short variable names and globals will have longer names.
@@ -164,4 +157,10 @@ The rules:
 9. All tests should run with `go test` and outside tooling should not be required. No, we don't need another unit testing framework. Assertion packages are acceptable if they provide _real_ incremental value.
 10. Even though we call these "rules" above, they are actually just guidelines. Since you've read all the rules, you now know that.
 
-If you are having trouble getting into the mood of idiomatic Go, we recommend reading through [Effective Go](https://golang.org/doc/effective_go.html). The [Go Blog](https://blog.golang.org) is also a great resource. Drinking the kool-aid is a lot easier than going thirsty.
+If you are having trouble getting into the mood of idiomatic Go, we recommend reading through [Effective Go][EffectiveGo]. The [Go Blog][GoBlog] is also a great resource. Drinking the kool-aid is a lot easier than going thirsty.
+
+[CodeReviewComments]: https://github.com/golang/go/wiki/CodeReviewComments
+[EffectiveGo]: http://golang.org/doc/effective_go.html
+[GoLint]: https://github.com/golang/lint
+[GoBlog]: https://blog.golang.org
+[Testing]: TESTING.md

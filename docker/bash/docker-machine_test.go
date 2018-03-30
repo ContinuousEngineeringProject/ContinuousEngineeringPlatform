@@ -11,8 +11,12 @@ func createTestNodeData() []ArgsCreateNode {
 	return argsTestNodes
 }
 
-// TestDmCreate will test the DmCreate function
-//
+func removeTestNodes(testNodeData []ArgsCreateNode){
+	for i := 0; i < len(testNodeData); i++ {
+		DmRemove(testNodeData[i].PREFIX)
+	}
+}
+
 func TestDmCreate(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
@@ -21,10 +25,10 @@ func TestDmCreate(t *testing.T) {
 			t.Error("For", testNodeData[i].PREFIX, "expected RUNNING got", status,)
 		}
 	}
+	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
 }
 
-// TestDmStop will test the DmStop function
-//
 func TestDmStop (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
@@ -33,10 +37,10 @@ func TestDmStop (t *testing.T) {
 			t.Error("For", testNodeData[i].PREFIX, "expected STOPPED got", status,)
 		}
 	}
+	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
 }
 
-// TestDmStart will test the DmStart function
-//
 func TestDmStart (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
@@ -45,10 +49,10 @@ func TestDmStart (t *testing.T) {
 			t.Error("For", testNodeData[i].PREFIX, "expected RUNNING got", status,)
 		}
 	}
+	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
 }
 
-// TestDmRemove will test the DmRemove function
-//
 func TestDmRemove (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
@@ -57,10 +61,10 @@ func TestDmRemove (t *testing.T) {
 			t.Error("For", testNodeData[i].PREFIX, "expected REMOVED got", status,)
 		}
 	}
+	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
 }
 
-// TestDmSSH will test the DmSSH function
-//
 func TestDmSSH(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
@@ -75,13 +79,9 @@ func TestDmSSH(t *testing.T) {
 		}
 	}
 	// Remove node(s) created during the test
-	for i := 0; i < len(testNodeData); i++ {
-		DmRemove(testNodeData[i].PREFIX)
-	}
+	removeTestNodes(testNodeData)
 }
 
-// TestDmSCP will test the DmSCP function
-//
 func TestDmSCP(t *testing.T) {
 	// TODO: Refactor to include multiple source & dest locations
 	testNodeData := createTestNodeData()
@@ -97,7 +97,18 @@ func TestDmSCP(t *testing.T) {
 		}
 	}
 	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
+}
+
+func TestDmStatus(t *testing.T) {
+	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		DmRemove(testNodeData[i].PREFIX)
+		DmCreate(testNodeData[i], testNodeData[i].PREFIX)
+		nodeStatus := DmStatus(testNodeData[i].PREFIX)
+		if nodeStatus != "RUNDNING" {
+			t.Error("For", testNodeData[i].PREFIX, "expected RUNDNING got", nodeStatus,)
+		}
 	}
+	// Remove node(s) created during the test
+	removeTestNodes(testNodeData)
 }

@@ -1,6 +1,6 @@
 # Testing
 
-This document contains the Continuous Engineering Platform code testing guidelines. It should answer any questions you may have as an aspiring contributor.
+This document contains the Continuous Engineering Platform code testing guidelines. It should answer any questions you may have as an aspiring contributor. 
 
 ## Test suites
 
