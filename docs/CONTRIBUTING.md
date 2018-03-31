@@ -6,7 +6,7 @@ Want to hack on the Continuous Engineering Platform? Awesome! This page contains
 
 A great way to contribute to the project is to send a detailed report when you encounter an issue. We always appreciate a well-written, thorough bug report, and will thank you for it!
 
-Check that [our issue database](https://github.com/ContinuousEngineeringProject/ContinuousEngineeringPlatform/issues) doesn't already include that problem or suggestion before submitting an issue. If you find a match, you can use the "subscribe" button to get notified on updates. Do *not* leave random "+1" or "I have this too" comments, as they only clutter the discussion, and don't help resolving it. However, if you have ways to reproduce the issue or have additional information that may help resolving the issue, please leave a comment.
+Check that [our issue database][RaiseIssue] doesn't already include that problem or suggestion before submitting an issue. If you find a match, you can use the "subscribe" button to get notified on updates. Do *not* leave random "+1" or "I have this too" comments, as they only clutter the discussion, and don't help in resolving it. However, if you have ways to reproduce the issue or have additional information that may help in resolving the issue, please leave a comment.
 
 ## Quick contribution tips and guidelines
 
@@ -14,13 +14,47 @@ This section gives the experienced contributor some tips and guidelines.
 
 ### Pull requests are always welcome
 
-Not sure if that typo is worth a pull request? Found a bug and know how to fix it? Do it! We will appreciate it. Any significant improvement should be documented as [a GitHub issue](https://github.com/ContinuousEngineeringProject/ContinuousEngineeringPlatform/issues) before anybody starts working on it.
+Not sure if that typo is worth a pull request? Found a bug and know how to fix it? Do it! We will appreciate it. Any significant improvement should be documented as [a GitHub issue][RaiseIssue] before anybody starts working on it.
 
 We are always thrilled to receive pull requests. We do our best to process them quickly. If your pull request is not accepted on the first try, don't get discouraged!
 
 ### Design and cleanup proposals
 
 You can propose new designs for existing features. You can also design entirely new features. We really appreciate contributors who want to refactor or otherwise cleanup our project.
+
+### Connect with other Continuous Engineering Platform contributors
+
+<table class="tg">
+  <col width="45%">
+  <col width="65%">
+  <!--
+  <tr>
+    <td>Forums</td>
+    <td>
+      A public forum for users to discuss questions and explore current design patterns and best practices about all the Continuous Engineering Project. To participate, log in with your Github account or create an account at <a href="https://forums.mobyproject.org" target="_blank">https://forums.mobyproject.org</a>.
+    </td>
+  </tr>
+  -->
+  <tr>
+    <td>Slack</td>
+    <td>
+      <p>
+        Register for the Continuous Engineering Project Community Slack at
+	<a href="https://community.docker.com/registrations/groups/4316" target="_blank">https://community.docker.com/registrations/groups/4316</a>.
+        We use the #moby-project channel for general discussion, and there are seperate channels for other Moby projects such as #containerd.
+	Archives are available at <a href="https://dockercommunity.slackarchive.io/" target="_blank">https://dockercommunity.slackarchive.io/</a>.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>Twitter</td>
+    <td>
+      You can follow <a href="https://twitter.com/moby/" target="_blank">Moby Project Twitter feed</a>
+      to get updates on our products. You can also tweet us questions or just
+      share blogs or stories.
+    </td>
+  </tr>
+</table>
 
 ### Conventions
 
@@ -49,11 +83,11 @@ Larger changes typically work best with design documents. These are focused on p
 
 ### Commit Messages
 
-Commit messages must start with a capitalized and short summary (max. 50 chars) written in the imperative, followed by an optional, more detailed explanatory text which is separated from the summary by an empty line.
+Commit messages must start with a capitalised and short summary (max. 50 chars) written in the imperative, followed by an optional, more detailed explanatory text which is separated from the summary by an empty line.
 
 Commit messages should follow best practices, including explaining the context of the problem and how it was solved, including in caveats or follow up changes required. They should tell the story of the change and provide readers understanding of what led to it.
 
-If you're lost about what this even means, please see [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/) for a start.
+If you're lost about what this even means, please see [How to Write a Git Commit Message][GitCommit] for a start.
 
 In practice, the best approach to maintaining a nice commit message is to leverage a `git add -p` and `git commit --amend` to formulate a solid changeset. This allows one to piece together a change, as information becomes available.
 
@@ -67,9 +101,9 @@ Remember, you're telling part of the story with the commit message. Don't make y
 
 Code review comments may be added to your pull request. Discuss, then make the suggested modifications and push additional commits to your feature branch. Post a comment after pushing. New commits show up in the pull request automatically, but the reviewers are notified only when you comment.
 
-Pull requests must be cleanly rebased on top of master without multiple branches mixed into the PR.
+Pull requests must be cleanly rebased on top of develop without multiple branches mixed into the PR.
 
-**Git tip**: If your PR no longer merges cleanly, use `rebase master` in your feature branch to update your pull request rather than `merge master`.
+**Git tip**: If your PR no longer merges cleanly, use `rebase develop` in your feature branch to update your pull request rather than `merge develop`.
 
 Before you make a pull request, squash your commits into logical units of work using `git rebase -i` and `git push -f`. A logical unit of work is a consistent set of patches that should be reviewed together: for example, upgrading the version of a vendored dependency and taking advantage of its now available new feature constitute two separate units of work. Implementing a new function and calling it in another file constitute a single logical unit of work. The very high majority of submissions should have a single commit, so if in doubt: squash down to one.
 
@@ -85,7 +119,7 @@ Please see the [Coding Style](#coding-style) for further guidelines.
 
 Continuous Engineering Platform maintainers use LGTM (Looks Good To Me) in comments on the code review to indicate acceptance, or use the Github review approval feature.
 
-<!-- For an explanation of the review and approval process see the [REVIEWING](docs/REVIEWING.md) page. -->
+For an explanation of the review and approval process see the [REVIEWING](docs/REVIEWING.md) page.
 
 ### Sign your work
 
@@ -164,3 +198,5 @@ If you are having trouble getting into the mood of idiomatic Go, we recommend re
 [GoLint]: https://github.com/golang/lint
 [GoBlog]: https://blog.golang.org
 [Testing]: TESTING.md
+[RaiseIssue]: https://github.com/ContinuousEngineeringProject/ContinuousEngineeringPlatform/issues
+[GitCommit]: http://chris.beams.io/posts/git-commit/
