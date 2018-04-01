@@ -22,7 +22,6 @@ We are always thrilled to receive pull requests. We do our best to process them 
 
 You can propose new designs for existing features. You can also design entirely new features. We really appreciate contributors who want to refactor or otherwise cleanup our project.
 
-<!--
 ### Connect with other Continuous Engineering Platform contributors
 
 <table class="tg">
@@ -56,7 +55,6 @@ You can propose new designs for existing features. You can also design entirely 
     </td>
   </tr>
 </table>
--->
 
 ### Conventions
 
