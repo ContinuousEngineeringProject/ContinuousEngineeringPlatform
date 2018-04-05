@@ -33,7 +33,7 @@ func TestDmStop (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
 		status := DmStop(testNodeData[i].PREFIX)
-		if status != "STOPPED" {
+		if status != "Stopped" {
 			t.Error("For", testNodeData[i].PREFIX, "expected STOPPED got", status,)
 		}
 	}
@@ -45,7 +45,7 @@ func TestDmStart (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
 		status := DmStart(testNodeData[i].PREFIX)
-		if status != "RUNNING" {
+		if status != "Running" {
 			t.Error("For", testNodeData[i].PREFIX, "expected RUNNING got", status,)
 		}
 	}
@@ -69,7 +69,7 @@ func TestDmSSH(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
 		node := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		if node == "RUNNING" {
+		if node == "Running" {
 			sshOutput := DmSSH(testNodeData[i].PREFIX,"ls")
 			if sshOutput != "EXEC" { //TODO: needs to be the expected return value from the ssh
 				t.Error("Failed to ssh to ", testNodeData[i].PREFIX, "expected EXEC got", sshOutput,)
@@ -87,7 +87,7 @@ func TestDmSCP(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
 		node := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		if node == "RUNNING" {
+		if node == "Running" {
 			scpStatus := DmSCP("./docker-machine_test.go",testNodeData[i].PREFIX+":~",true)
 			if scpStatus != "EXEC" { //TODO: needs to be the expected return value from the ssh
 				t.Error("Failed to scp to", testNodeData[i].PREFIX, "expected EXEC got", scpStatus,)
@@ -105,8 +105,8 @@ func TestDmStatus(t *testing.T) {
 	for i := 0; i < len(testNodeData); i++ {
 		DmCreate(testNodeData[i], testNodeData[i].PREFIX)
 		nodeStatus := DmStatus(testNodeData[i].PREFIX)
-		if nodeStatus != "RUNDNING" {
-			t.Error("For", testNodeData[i].PREFIX, "expected RUNDNING got", nodeStatus,)
+		if nodeStatus != "Running" {
+			t.Error("For", testNodeData[i].PREFIX, "expected Running got", nodeStatus,)
 		}
 	}
 	// Remove node(s) created during the test

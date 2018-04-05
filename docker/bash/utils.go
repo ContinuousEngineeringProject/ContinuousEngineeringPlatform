@@ -18,9 +18,12 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 
 	scanner := bufio.NewScanner(cmdReader)
 	go func() {
+		var cmdOutput string
 		for scanner.Scan() {
-			fmt.Printf("| %s\n", scanner.Text())
+			cmdOutput = scanner.Text()
+			fmt.Printf("| %s\n", cmdOutput)
 		}
+		status = cmdOutput
 	}()
 
 	err = cmd.Start()
@@ -32,10 +35,10 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 
 	err = cmd.Wait()
 	if err != nil {
-		status = "Error waiting for Cmd:" + err
+		status = "Error waiting for Cmd:"
 		fmt.Fprintln(os.Stderr, status, err)
 		return status
 	}
 	
-	return
+	return status
 }

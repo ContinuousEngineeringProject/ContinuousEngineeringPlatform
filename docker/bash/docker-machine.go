@@ -106,7 +106,8 @@ func DmSCP(locationSource string, locationDestination string, isFile bool) (scpS
 // DmStatus will return the status of a node
 //
 func DmStatus(nodeName string) (nodeStatus string){
+	dCmd := "status"
+	dCmdArgs := []string{dCmd,nodeName}
+	return runBashCmd(exec.Command(cmdName, dCmdArgs...))
 
-
-	return "TODO"
 }
