@@ -40,5 +40,5 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 		return status
 	}
 	
-	return status
+	return
 }

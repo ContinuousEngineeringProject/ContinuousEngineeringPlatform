@@ -20,13 +20,13 @@ func removeTestNodes(testNodeData []ArgsCreateNode){
 func TestDmCreate(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		status := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		if status != "RUNNING" {
-			t.Error("For", testNodeData[i].PREFIX, "expected RUNNING got", status,)
+		DmCreate(testNodeData[i], testNodeData[i].PREFIX)
+		// Verify status of node
+		status := DmStatus(testNodeData[i].PREFIX)
+		if status != "Running" {
+			t.Error("For", testNodeData[i].PREFIX, "expected Running got", status,)
 		}
 	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
 }
 
 func TestDmStop (t *testing.T) {
@@ -34,7 +34,7 @@ func TestDmStop (t *testing.T) {
 	for i := 0; i < len(testNodeData); i++ {
 		status := DmStop(testNodeData[i].PREFIX)
 		if status != "Stopped" {
-			t.Error("For", testNodeData[i].PREFIX, "expected STOPPED got", status,)
+			t.Error("For", testNodeData[i].PREFIX, "expected Stopped got", status,)
 		}
 	}
 	// Remove node(s) created during the test
