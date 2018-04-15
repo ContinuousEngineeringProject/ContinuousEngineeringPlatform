@@ -19,11 +19,17 @@ Testing is its own specialty. If you aren't familiar with testing techniques, th
 The Continuous Engineering Platform has two test suites:
 
 * Unit tests - use standard `go test` and [testify][Testify] assertions. They are located in the package they test. Unit tests should be fast and test only their own  package.
-* Integration tests - use standard `go test` and [testify][Testify] assertions. They are located in `./integration/<component>` directories, where `component` is: container, image, volume, etc. These tests perform HTTP requests to an API endpoint and check the HTTP response and daemon state after the call.
+* Integration tests - use standard `go test` and [testify][Testify] assertions. They are located in `./integration/<component>` directories.
 
 ## Writing new tests
 
 Most code changes will fall into one of the following categories.
+
+### Naming test functions
+
+The naming convention for a test function should have a name that describes the test case, in the format:
+
+`Test<Function under test>ToReturn<Expected output><Conditions>`
 
 ### Writing tests for new features
 
@@ -37,7 +43,7 @@ If the new feature does not include a completely new API endpoint consider addin
 
 Bugs fixes should include a unit test case which exercises the bug.
 
-A bug fix may also include new assertions in an existing integration tests for the API endpoint.
+A bug fix may also include new assertions in an existing integration test.
 
 ## Running tests
 
@@ -66,10 +72,10 @@ Running the entire test suite on your current repository can take over half an h
 ```
 make test
 ```
-
+<!--
 ## Run unit tests
 
-We use golang standard [testing][Testing] package or [gocheck][gocheck] for our unit tests.
+We use golang standard [testing][Testing] package for our unit tests.
 
 You can use the `TESTDIRS` environment variable to run unit tests for a single package.
 
@@ -91,11 +97,12 @@ $ TESTDIRS='opts' TESTFLAGS='-test.run ^TestValidateIPAddress$' make test-unit
 
 ## Run integration tests
 
-We use golang standard [testing][Testing] package for our integration-cli tests. You can use the `TESTFLAGS` environment variable to run a single test. The flag's value is passed as arguments to the `go test` command. For example, from your local host you can run the `TestBuild` test with this command:
+We use golang standard [testing][Testing] package for our integration tests. You can use the `TESTFLAGS` environment variable to run a single test. The flag's value is passed as arguments to the `go test` command. For example, from your local host you can run the `TestBuild` test with this command:
 
 ```bash
-$ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration-cli
+$ TESTFLAGS='-check.f DockerSuite.TestBuild*' make test-integration
 ```
+-->
 
 ## Where to go next
 

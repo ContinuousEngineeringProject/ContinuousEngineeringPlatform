@@ -14,21 +14,21 @@ type ListNodeStatus struct {
 
 // CreateNodes will create multiple nodes
 //
-func CreateNodes(nodeArgs bash.ArgsCreateNode) (nodesStatus []ListNodeStatus){
-	fmt.Fprintln(os.Stderr, "Creating "+strconv.Itoa(nodeArgs.COUNT)+" nodes")
+func CreateNodes(nodeConfig bash.ArgsCreateNode) (nodesStatus []ListNodeStatus){
+	fmt.Fprintln(os.Stderr, "Creating "+strconv.Itoa(nodeConfig.COUNT)+" nodes")
 
-	nodesStatus = make([]ListNodeStatus,nodeArgs.COUNT)
-	if nodeArgs.COUNT > 0 {
+	nodesStatus = make([]ListNodeStatus, nodeConfig.COUNT)
+	if nodeConfig.COUNT > 0 {
 		//Populate node names
-		for n := 0; n < nodeArgs.COUNT; n++ {
-			nodesStatus[n].NODE = nodeArgs.PREFIX + strconv.Itoa(n+1)
+		for n := 0; n < nodeConfig.COUNT; n++ {
+			nodesStatus[n].NODE = nodeConfig.PREFIX + strconv.Itoa(n+1)
 		}
 		//Create the nodes & report status
 		for n := 0; n < len(nodesStatus); n++ {
-			nodesStatus[n].STATUS = bash.DmCreate(nodeArgs, nodesStatus[n].NODE)
+			nodesStatus[n].STATUS = bash.DmCreate(nodeConfig, nodesStatus[n].NODE)
 		}
 	} else {
-		fmt.Fprintln(os.Stderr, "Error Creating node: "+strconv.Itoa(nodeArgs.COUNT)+" is an invalid number of nodes")
+		fmt.Fprintln(os.Stderr, "Error Creating node: "+strconv.Itoa(nodeConfig.COUNT)+" is an invalid number of nodes")
 		nodesStatus[0].NODE = "NODE_COUNT"
 		nodesStatus[0].STATUS = "INVALID"
 	}

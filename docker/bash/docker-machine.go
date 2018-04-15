@@ -20,7 +20,6 @@ type ArgsCreateNode struct {
 // DmCreate will create a node using docker-machine
 //
 func DmCreate(options ArgsCreateNode, nodeName string) (status string){
-	// TODO: Refactor DmCreate to use actual docker-machine status
 	dCmd := "create"
 	// Build arguments based on specified driver
 	switch options.DRIVER {
@@ -28,15 +27,23 @@ func DmCreate(options ArgsCreateNode, nodeName string) (status string){
 		dCmdAgrs := []string{dCmd, "-d", options.DRIVER, "--virtualbox-memory", options.MEMORY, "--virtualbox-cpu-count", options.CPU, nodeName}
 		fmt.Fprintln(os.Stderr, "Creating node "+nodeName+"...")
 		runBashCmd(exec.Command(cmdName, dCmdAgrs...))
-		status = "RUNNING"
-		fmt.Fprintln(os.Stderr, "Node "+nodeName+" created")
+
+		return dmStatus(nodeName)
 	default:
 		// Throw unknown driver error
-		status = "ERROR"
 		fmt.Fprintln(os.Stderr, "Error unknown driver", options.DRIVER)
-	}
 
-	return status
+		return "Error"
+	}
+}
+
+// dmStatus will return the status of a node
+//
+func dmStatus(nodeName string) (nodeStatus string){
+	dCmd := "status"
+	dCmdArgs := []string{dCmd,nodeName}
+
+	return runBashCmd(exec.Command(cmdName, dCmdArgs...))
 }
 
 // DmRemove will remove a node
@@ -88,7 +95,7 @@ func DmSSH(nodeName string, bashCmd string) (sshOutput string){
 	return "EXEC"
 }
 
-// DmSCP will copy files or directories to & from a node
+// DmSCP will copy files or directories between nodes and hosts
 //
 func DmSCP(locationSource string, locationDestination string, isFile bool) (scpStatus string){
 	dCmd := "scp"
@@ -101,12 +108,4 @@ func DmSCP(locationSource string, locationDestination string, isFile bool) (scpS
 	}
 	// TODO: Verify that the command ran & Return the the output
 	return "EXEC"
-}
-
-// DmStatus will return the status of a node
-//
-func DmStatus(nodeName string) (nodeStatus string){
-
-
-	return "TODO"
 }
