@@ -1,15 +1,9 @@
 package bash
 
-import "testing"
-
-
-func createTestNodeData() []ArgsCreateNode {
-	var argsTestNodes = []ArgsCreateNode{
-		{"TestVBNode","virtualbox","1024","1",1},
-//		{"TestVBNode2","virtualbox","1024","1",1},
-	}
-	return argsTestNodes
-}
+import (
+	"testing"
+	"strconv"
+)
 
 func removeTestNodes(testNodeData []ArgsCreateNode){
 	for i := 0; i < len(testNodeData); i++ {
@@ -17,14 +11,29 @@ func removeTestNodes(testNodeData []ArgsCreateNode){
 	}
 }
 
-func TestDmCreate(t *testing.T) {
+func createTestNodeData() []ArgsCreateNode {
+	var argsTestNodes = []ArgsCreateNode{
+		{"TestVBNode","virtualbox","1024","1",1},
+	}
+	return argsTestNodes
+}
+
+func TestDmCreateToReturnRunningNode(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		// Verify status of node
-		status := DmStatus(testNodeData[i].PREFIX)
-		if status != "Running" {
-			t.Error("For", testNodeData[i].PREFIX, "expected Running got", status,)
+		nodeStatus := DmCreate(testNodeData[i], testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus != "Running" {
+			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected Running got", nodeStatus,)
+		}
+	}
+}
+
+func TestDmStatus(t *testing.T) {
+	testNodeData := createTestNodeData()
+	for i := 0; i < len(testNodeData); i++ {
+		nodeStatus := dmStatus(testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus != "Running" {
+			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected Running got", nodeStatus,)
 		}
 	}
 }
@@ -32,50 +41,34 @@ func TestDmCreate(t *testing.T) {
 func TestDmStop (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		status := DmStop(testNodeData[i].PREFIX)
-		if status != "Stopped" {
-			t.Error("For", testNodeData[i].PREFIX, "expected Stopped got", status,)
+		nodeStatus := DmStop(testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus != "Stopped" {
+			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected Stopped got", nodeStatus,)
 		}
 	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
 }
 
 func TestDmStart (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		status := DmStart(testNodeData[i].PREFIX)
-		if status != "Running" {
-			t.Error("For", testNodeData[i].PREFIX, "expected RUNNING got", status,)
+		nodeStatus := DmStart(testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus != "Running" {
+			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected RUNNING got", nodeStatus,)
 		}
 	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
-}
-
-func TestDmRemove (t *testing.T) {
-	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		status := DmRemove(testNodeData[i].PREFIX)
-		if status != "REMOVED" {
-			t.Error("For", testNodeData[i].PREFIX, "expected REMOVED got", status,)
-		}
-	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
 }
 
 func TestDmSSH(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		node := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		if node == "Running" {
-			sshOutput := DmSSH(testNodeData[i].PREFIX,"ls")
+		nodeStatus := DmCreate(testNodeData[i], testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus == "Running" {
+			sshOutput := DmSSH(testNodeData[i].PREFIX + strconv.Itoa(i+1),"ls")
 			if sshOutput != "EXEC" { //TODO: needs to be the expected return value from the ssh
-				t.Error("Failed to ssh to ", testNodeData[i].PREFIX, "expected EXEC got", sshOutput,)
+				t.Error("Failed to ssh to ", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected EXEC got", sshOutput,)
 			}
 		} else {
-			t.Error("Failed to create", testNodeData[i].PREFIX,)
+			t.Error("Failed to create", testNodeData[i].PREFIX + strconv.Itoa(i+1),)
 		}
 	}
 	// Remove node(s) created during the test
@@ -86,29 +79,26 @@ func TestDmSCP(t *testing.T) {
 	// TODO: Refactor to include multiple source & dest locations
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		node := DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		if node == "Running" {
-			scpStatus := DmSCP("./docker-machine_test.go",testNodeData[i].PREFIX+":~",true)
+		nodeStatus := DmCreate(testNodeData[i], testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus == "Running" {
+			scpStatus := DmSCP("./docker-machine_test.go",testNodeData[i].PREFIX+strconv.Itoa(i+1)+":~",true)
 			if scpStatus != "EXEC" { //TODO: needs to be the expected return value from the ssh
-				t.Error("Failed to scp to", testNodeData[i].PREFIX, "expected EXEC got", scpStatus,)
+				t.Error("Failed to scp to", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected EXEC got", scpStatus,)
 			}
 		} else {
-			t.Error("Failed to create", testNodeData[i].PREFIX,)
+			t.Error("Failed to create", testNodeData[i].PREFIX + strconv.Itoa(i+1),)
 		}
 	}
 	// Remove node(s) created during the test
 	removeTestNodes(testNodeData)
 }
 
-func TestDmStatus(t *testing.T) {
+func TestDmRemove (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {
-		DmCreate(testNodeData[i], testNodeData[i].PREFIX)
-		nodeStatus := DmStatus(testNodeData[i].PREFIX)
-		if nodeStatus != "Running" {
-			t.Error("For", testNodeData[i].PREFIX, "expected Running got", nodeStatus,)
+		nodeStatus := DmRemove(testNodeData[i].PREFIX + strconv.Itoa(i+1))
+		if nodeStatus != "REMOVED" {
+			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected REMOVED got", nodeStatus,)
 		}
 	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
 }

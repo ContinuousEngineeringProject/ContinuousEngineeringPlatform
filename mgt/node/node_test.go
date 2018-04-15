@@ -8,7 +8,7 @@ import (
 
 func createTestNodeData() []bash.ArgsCreateNode {
 	var argsTestNodes = []bash.ArgsCreateNode{
-		{"TestNode","virtualbox","1024","1",2},
+		{"TestVBNode","virtualbox","1024","1",2},
 	}
 	return argsTestNodes
 }
@@ -21,7 +21,7 @@ func createTestNodeNameList(testNodeData bash.ArgsCreateNode) (testNodeNames []s
 	return testNodeNames
 }
 
-func TestCreateNodes(t *testing.T) {
+func TestCreateNodesToReturnMultipleRunningNodes(t *testing.T) {
 	testNodeData := createTestNodeData()
 
 	for node := 0; node < len(testNodeData); node++ {
@@ -29,8 +29,8 @@ func TestCreateNodes(t *testing.T) {
 
 		//Validate
 		for i:=0; i < len(status); i++ {
-			if status[node].STATUS != "RUNNING" {
-				t.Error("For", status[node].NODE, "expected RUNNING got", status[node].STATUS, )
+			if status[node].STATUS != "Running" {
+				t.Error("For", status[node].NODE, "expected Running got", status[node].STATUS, )
 			}
 		}
 	}
