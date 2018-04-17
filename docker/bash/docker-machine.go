@@ -28,7 +28,7 @@ func DmCreate(options ArgsCreateNode, nodeName string) (status string){
 		fmt.Fprintln(os.Stderr, "Creating node "+nodeName+"...")
 		runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 
-		return dmStatus(nodeName)
+		return DmStatus(nodeName)
 	default:
 		// Throw unknown driver error
 		fmt.Fprintln(os.Stderr, "Error unknown driver", options.DRIVER)
@@ -37,9 +37,9 @@ func DmCreate(options ArgsCreateNode, nodeName string) (status string){
 	}
 }
 
-// dmStatus will return the status of a node
+// DmStatus will return the status of a node
 //
-func dmStatus(nodeName string) (nodeStatus string){
+func DmStatus(nodeName string) (nodeStatus string){
 	dCmd := "status"
 	dCmdArgs := []string{dCmd,nodeName}
 
@@ -49,14 +49,13 @@ func dmStatus(nodeName string) (nodeStatus string){
 // DmRemove will remove a node
 //
 func DmRemove(nodeName string) (status string){
-	// TODO: Refactor DmRemove to use docker-machine to confirm node does not exist
 	dCmd := "rm"
 	dCmdAgrs := []string{dCmd, nodeName, "--force"}
 
 	fmt.Fprintln(os.Stderr, "Removing node "+nodeName+"...")
-	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
+	status = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" removed")
-	return "REMOVED"
+	return
 }
 
 // DmStop will stop a running node
