@@ -21,7 +21,7 @@ func createTestNodeNameList(testNodeData bash.ArgsCreateNode) (testNodeNames []s
 	return testNodeNames
 }
 
-func TestCreateNodesToReturnMultipleRunningNodes(t *testing.T) {
+func TestCreateNodesToReturnMultipleNodesAreCreatedAndRunning(t *testing.T) {
 	testNodeData := createTestNodeData()
 
 	for node := 0; node < len(testNodeData); node++ {
@@ -68,7 +68,7 @@ func TestStartNodes(t *testing.T) {
 	}
 }
 
-func TestRemoveNodes(t *testing.T) {
+func TestRemoveNodesToReturnMultipleNodesAreDeleted(t *testing.T) {
 	testNodeData := createTestNodeData()
 
 	for i := 0; i < len(testNodeData); i++ {
@@ -77,8 +77,8 @@ func TestRemoveNodes(t *testing.T) {
 
 		//Validate
 		for s:=0; s < len(status); s++ {
-			if status[s].STATUS != "REMOVED" {
-				t.Error("For", status[s].NODE, "expected REMOVED got", status[s].STATUS, )
+			if status[s].STATUS != "Successfully removed "+status[s].NODE {
+				t.Error("For", status[s].NODE, "expected", "'Successfully removed "+status[s].NODE+"'", "got", "'"+status[s].STATUS+"'", )
 			}
 		}
 	}

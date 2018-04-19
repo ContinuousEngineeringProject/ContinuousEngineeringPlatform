@@ -62,8 +62,10 @@ func StartNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 func RemoveNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Removing "+strconv.Itoa(len(nodeNames))+" nodes")
 
+	nodesStatus = make([]ListNodeStatus, len(nodeNames))
 	for node := 0; node < len(nodeNames); node++ {
-		bash.DmRemove(nodeNames[node])
+		nodesStatus[node].NODE = nodeNames[node]
+		nodesStatus[node].STATUS = bash.DmRemove(nodeNames[node])
 	}
-	return nodesStatus
+	return
 }

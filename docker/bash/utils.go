@@ -12,7 +12,7 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 	if err != nil {
 		status = "Error creating StdoutPipe for Cmd:"
 		fmt.Fprintln(os.Stderr, status, err)
-//		os.Exit(1)
+
 		return status
 	}
 
@@ -30,6 +30,7 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 	if err != nil {
 		status = "Error starting Cmd:"
 		fmt.Fprintln(os.Stderr, status, err)
+
 		return status
 	}
 
@@ -37,8 +38,9 @@ func runBashCmd (cmd *exec.Cmd) (status string){
 	if err != nil {
 		status = "Error waiting for Cmd:"
 		fmt.Fprintln(os.Stderr, status, err)
+
 		return status
 	}
-	
+
 	return
 }
