@@ -55,20 +55,21 @@ func DmRemove(nodeName string) (status string){
 	fmt.Fprintln(os.Stderr, "Removing node "+nodeName+"...")
 	status = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" removed")
+
 	return
 }
 
 // DmStop will stop a running node
 //
 func DmStop(nodeName string) (status string){
-	// TODO: Refactor DmStop to use actual docker-machine status
 	dCmd := "stop"
 	dCmdAgrs := []string{dCmd, nodeName}
 
 	fmt.Fprintln(os.Stderr, "Stoping node "+nodeName+"...")
-	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
+	status = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 	fmt.Fprintln(os.Stderr, "Node "+nodeName+" stopped")
-	return "STOPPED"
+
+	return DmStatus(nodeName)
 }
 
 // DmStart will start a stopped node
