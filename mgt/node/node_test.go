@@ -24,29 +24,28 @@ func createTestNodeNameList(testNodeData bash.ArgsCreateNode) (testNodeNames []s
 func TestCreateNodesToReturnMultipleNodesAreCreatedAndRunning(t *testing.T) {
 	testNodeData := createTestNodeData()
 
-	for node := 0; node < len(testNodeData); node++ {
-		status := CreateNodes(testNodeData[node])
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		nodesStatus := CreateNodes(testNodeData[testIteration])
 
 		//Validate
-		for i:=0; i < len(status); i++ {
-			if status[node].STATUS != "Running" {
-				t.Error("For", status[node].NODE, "expected Running got", status[node].STATUS, )
+		for node :=0; node < len(nodesStatus); node++ {
+			if nodesStatus[node].STATUS != "Running" {
+				t.Error("For", nodesStatus[node].NODE, "expected Running got", nodesStatus[node].STATUS, )
 			}
 		}
 	}
 }
 
-func TestStopNodes(t *testing.T) {
+func TestStopNodesToReturnMultipleNodesAreStopped(t *testing.T) {
 	testNodeData := createTestNodeData()
 
-	for i := 0; i < len(testNodeData); i++ {
-		nodeNames := createTestNodeNameList(testNodeData[i])
-		status := StopNodes(nodeNames)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		nodesStatus := StopNodes(createTestNodeNameList(testNodeData[testIteration]))
 
 		//Validate
-		for s:=0; s < len(status); s++ {
-			if status[s].STATUS != "STOPPED" {
-				t.Error("For", status[s].NODE, "expected STOPPED got", status[s].STATUS, )
+		for node := 0; node < len(nodesStatus); node++ {
+			if nodesStatus[node].STATUS != "Stopped" {
+				t.Error("For", nodesStatus[node].NODE, "expected Stopped got", nodesStatus[node].STATUS, )
 			}
 		}
 	}
@@ -57,12 +56,12 @@ func TestStartNodes(t *testing.T) {
 
 	for i := 0; i < len(testNodeData); i++ {
 		nodeNames := createTestNodeNameList(testNodeData[i])
-		status := StartNodes(nodeNames)
+		nodesStatus := StartNodes(nodeNames)
 
 		//Validate
-		for s:=0; s < len(status); s++ {
-			if status[s].STATUS != "RUNNING" {
-				t.Error("For", status[s].NODE, "expected RUNNING got", status[s].STATUS, )
+		for s:=0; s < len(nodesStatus); s++ {
+			if nodesStatus[s].STATUS != "RUNNING" {
+				t.Error("For", nodesStatus[s].NODE, "expected RUNNING got", nodesStatus[s].STATUS, )
 			}
 		}
 	}
@@ -71,14 +70,13 @@ func TestStartNodes(t *testing.T) {
 func TestRemoveNodesToReturnMultipleNodesAreDeleted(t *testing.T) {
 	testNodeData := createTestNodeData()
 
-	for i := 0; i < len(testNodeData); i++ {
-		nodeNames := createTestNodeNameList(testNodeData[i])
-		status := RemoveNodes(nodeNames)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		nodesStatus := RemoveNodes(createTestNodeNameList(testNodeData[testIteration]))
 
 		//Validate
-		for s:=0; s < len(status); s++ {
-			if status[s].STATUS != "Successfully removed "+status[s].NODE {
-				t.Error("For", status[s].NODE, "expected", "'Successfully removed "+status[s].NODE+"'", "got", "'"+status[s].STATUS+"'", )
+		for node :=0; node < len(nodesStatus); node++ {
+			if nodesStatus[node].STATUS != "Successfully removed "+nodesStatus[node].NODE {
+				t.Error("For", nodesStatus[node].NODE, "expected", "'Successfully removed "+nodesStatus[node].NODE+"'", "got", "'"+nodesStatus[node].STATUS+"'", )
 			}
 		}
 	}

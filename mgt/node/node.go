@@ -32,7 +32,7 @@ func CreateNodes(nodeConfig bash.ArgsCreateNode) (nodesStatus []ListNodeStatus){
 		nodesStatus[0].NODE = "NODE_COUNT"
 		nodesStatus[0].STATUS = "INVALID"
 	}
-	return nodesStatus
+	return
 }
 
 // StopNodes will stop multiple nodes
@@ -40,10 +40,12 @@ func CreateNodes(nodeConfig bash.ArgsCreateNode) (nodesStatus []ListNodeStatus){
 func StopNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Stopping "+strconv.Itoa(len(nodeNames))+" nodes")
 
+	nodesStatus = make([]ListNodeStatus, len(nodeNames))
 	for node := 0; node < len(nodeNames); node++ {
-		bash.DmStop(nodeNames[node])
+		nodesStatus[node].NODE = nodeNames[node]
+		nodesStatus[node].STATUS = bash.DmStop(nodeNames[node])
 	}
-	return nodesStatus
+	return
 }
 
 // StartNodes will start multiple stopped nodes

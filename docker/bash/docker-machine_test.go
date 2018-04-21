@@ -18,40 +18,38 @@ func createTestNodeData() []ArgsCreateNode {
 	return argsTestNodes
 }
 
-func TestDmCreateToReturnRunningNode(t *testing.T) {
+func TestDmCreateToReturnCreateSingleRunningNode(t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-			nodeStatus := DmCreate(testNodeData[i], testNodeData[i].PREFIX + strconv.Itoa(n+1))
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeStatus := DmCreate(testNodeData[testIteration], testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
 			if nodeStatus != "Running" {
-				t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(n+1), "expected Running got", nodeStatus,)
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Running got", nodeStatus,)
 			}
 		}
 	}
 }
 
-func TestDmStatus(t *testing.T) {
+func TestDmStatusToReturnStatusOfSingleRunningNode(t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-			nodeStatus := DmStatus(testNodeData[i].PREFIX + strconv.Itoa(n+1))
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeStatus := DmStatus(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
 			if nodeStatus != "Running" {
-				t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(n+1), "expected Running got", nodeStatus,)
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Running got", nodeStatus,)
 			}
 		}
 	}
 }
 
-func TestDmStop (t *testing.T) {
+func TestDmStopToReturnSingleNodeIsStopped (t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-
-		}
-
-		nodeStatus := DmStop(testNodeData[i].PREFIX + strconv.Itoa(i+1))
-		if nodeStatus != "Stopped" {
-			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected Stopped got", nodeStatus,)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeStatus := DmStop(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			if nodeStatus != "Stopped" {
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Stopped got", nodeStatus,)
+			}
 		}
 	}
 }
@@ -113,11 +111,11 @@ func TestDmSCP(t *testing.T) {
 	removeTestNodes(testNodeData)
 }
 
-func TestDmRemove (t *testing.T) {
+func TestDmRemoveToReturnSingleNodeIsRemoved (t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-			nodeName := testNodeData[i].PREFIX + strconv.Itoa(n+1)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeName := testNodeData[testIteration].PREFIX + strconv.Itoa(node+1)
 			nodeStatus := DmRemove(nodeName)
 			if nodeStatus != "Successfully removed "+nodeName {
 				t.Error("For", nodeName, "expected 'Successfully removed "+nodeName+"' got", "'"+nodeStatus+"'",)
