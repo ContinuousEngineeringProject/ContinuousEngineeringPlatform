@@ -111,7 +111,7 @@ func TestDmSCP(t *testing.T) {
 	removeTestNodes(testNodeData)
 }
 
-func TestDmRemove (t *testing.T) {
+func TestDmRemoveToReturnSingleNodeIsRemoved (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
