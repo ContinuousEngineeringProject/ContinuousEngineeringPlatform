@@ -105,3 +105,15 @@ func DmSCP(locationSource string, locationDestination string, isFile bool) (scpS
 	// TODO: Verify that the command ran & Return the the output
 	return "EXEC"
 }
+
+// DmRestart will restart a node
+//
+func DmRestart(nodeName string) (status string){
+	dCmd := "restart"
+	dCmdAgrs := []string{dCmd, nodeName}
+
+	fmt.Fprintln(os.Stderr, "Restarting node "+nodeName+"...")
+	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
+
+	return DmStatus(nodeName)
+}
