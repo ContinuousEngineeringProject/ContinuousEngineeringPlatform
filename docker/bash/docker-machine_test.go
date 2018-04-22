@@ -66,6 +66,18 @@ func TestDmStartToReturnSingleNodeIsStarted (t *testing.T) {
 	}
 }
 
+func TestDmRestartToReturnSingleNodeIsRestarted(t *testing.T) {
+	testNodeData := createTestNodeData()
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeStatus := DmRestart(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			if nodeStatus != "Running" {
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(testIteration+1), "expected Running got", nodeStatus,)
+			}
+		}
+	}
+}
+
 func TestDmSSH(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for i := 0; i < len(testNodeData); i++ {

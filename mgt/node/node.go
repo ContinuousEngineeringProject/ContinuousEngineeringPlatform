@@ -73,3 +73,16 @@ func RemoveNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	}
 	return
 }
+
+// RestartNodes will start multiple stopped nodes
+//
+func RestartNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
+	fmt.Fprintln(os.Stderr, "Restarting "+strconv.Itoa(len(nodeNames))+" nodes")
+
+	nodesStatus = make([]ListNodeStatus, len(nodeNames))
+	for node := 0; node < len(nodeNames); node++ {
+		nodesStatus[node].NODE = nodeNames[node]
+		nodesStatus[node].STATUS = bash.DmRestart(nodeNames[node])
+	}
+	return
+}

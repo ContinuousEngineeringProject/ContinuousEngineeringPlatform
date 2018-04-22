@@ -66,6 +66,21 @@ func TestStartNodesMultipleNodesAreStarted(t *testing.T) {
 	}
 }
 
+func TestRestartNodesMultipleNodesAreRestarted(t *testing.T) {
+	testNodeData := createTestNodeData()
+
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		nodeStatusList := RestartNodes(createTestNodeNameList(testNodeData[testIteration]))
+
+		//Validate
+		for node :=0; node < len(nodeStatusList); node++ {
+			if nodeStatusList[node].STATUS != "Running" {
+				t.Error("For", nodeStatusList[node].NODE, "expected", "Running", "got", nodeStatusList[node].STATUS, )
+			}
+		}
+	}
+}
+
 func TestRemoveNodesToReturnMultipleNodesAreDeleted(t *testing.T) {
 	testNodeData := createTestNodeData()
 
