@@ -54,16 +54,14 @@ func TestDmStopToReturnSingleNodeIsStopped (t *testing.T) {
 	}
 }
 
-func TestDmStart (t *testing.T) {
+func TestDmStartToReturnSingleNodeIsStarted (t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-
-		}
-
-		nodeStatus := DmStart(testNodeData[i].PREFIX + strconv.Itoa(i+1))
-		if nodeStatus != "Running" {
-			t.Error("For", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected RUNNING got", nodeStatus,)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeStatus := DmStart(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			if nodeStatus != "Running" {
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(testIteration+1), "expected Running got", nodeStatus,)
+			}
 		}
 	}
 }

@@ -53,10 +53,8 @@ func DmRemove(nodeName string) (status string){
 	dCmdAgrs := []string{dCmd, nodeName, "--force"}
 
 	fmt.Fprintln(os.Stderr, "Removing node "+nodeName+"...")
-	status = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
-	fmt.Fprintln(os.Stderr, "Node "+nodeName+" removed")
-
-	return
+// TODO: refomat the responce to be "Removed"
+	return runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 }
 
 // DmStop will stop a running node
@@ -66,8 +64,7 @@ func DmStop(nodeName string) (status string){
 	dCmdAgrs := []string{dCmd, nodeName}
 
 	fmt.Fprintln(os.Stderr, "Stoping node "+nodeName+"...")
-	status = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
-	fmt.Fprintln(os.Stderr, "Node "+nodeName+" stopped")
+	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 
 	return DmStatus(nodeName)
 }
@@ -75,14 +72,13 @@ func DmStop(nodeName string) (status string){
 // DmStart will start a stopped node
 //
 func DmStart(nodeName string) (status string){
-	// TODO: Refactor DmStart to use actual docker-machine status
 	dCmd := "start"
 	dCmdAgrs := []string{dCmd, nodeName}
 
 	fmt.Fprintln(os.Stderr, "Starting node "+nodeName+"...")
 	runBashCmd(exec.Command(cmdName, dCmdAgrs...))
-	fmt.Fprintln(os.Stderr, "Node "+nodeName+" started")
-	return "RUNNING"
+
+	return DmStatus(nodeName)
 }
 
 // DmSSH will ssh to a selected node and run the specified command
