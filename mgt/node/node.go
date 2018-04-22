@@ -53,13 +53,15 @@ func StopNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 func StartNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Starting "+strconv.Itoa(len(nodeNames))+" nodes")
 
+	nodesStatus = make([]ListNodeStatus, len(nodeNames))
 	for node := 0; node < len(nodeNames); node++ {
-		bash.DmStart(nodeNames[node])
+		nodesStatus[node].NODE = nodeNames[node]
+		nodesStatus[node].STATUS = bash.DmStart(nodeNames[node])
 	}
-	return nodesStatus
+	return 
 }
 
-// RemoveNodes will start multiple stopped nodes
+// RemoveNodes will remove multiple nodes
 //
 func RemoveNodes(nodeNames []string) (nodesStatus []ListNodeStatus){
 	fmt.Fprintln(os.Stderr, "Removing "+strconv.Itoa(len(nodeNames))+" nodes")
