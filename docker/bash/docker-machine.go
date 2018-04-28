@@ -53,7 +53,8 @@ func DmRemove(nodeName string) (status string){
 	dCmdAgrs := []string{dCmd, nodeName, "--force"}
 
 	fmt.Fprintln(os.Stderr, "Removing node "+nodeName+"...")
-// TODO: refomat the responce to be "Removed"
+
+	// TODO: refactor the response to be "Removed"
 	return runBashCmd(exec.Command(cmdName, dCmdAgrs...))
 }
 
@@ -86,25 +87,29 @@ func DmStart(nodeName string) (status string){
 func DmSSH(nodeName string, bashCmd string) (sshOutput string){
 	dCmd := "ssh"
 	dCmdArgs := []string{dCmd,nodeName,strconv.Quote(bashCmd)}
-	// TODO: Retrieve the output from the command run on the node
-	runBashCmd(exec.Command(cmdName, dCmdArgs...))
-	return "EXEC"
+
+	fmt.Fprintln(os.Stderr, "SSH to node "+nodeName+"...")
+	sshOutput = runBashCmd(exec.Command(cmdName, dCmdArgs...))
+
+	return
 }
 
+/*
 // DmSCP will copy files or directories between nodes and hosts
 //
 func DmSCP(locationSource string, locationDestination string, isFile bool) (scpStatus string){
 	dCmd := "scp"
 	if isFile==true {
 		dCmdArgs := []string{dCmd, locationSource, locationDestination}
-		runBashCmd(exec.Command(cmdName, dCmdArgs...))
+		scpStatus = runBashCmd(exec.Command(cmdName, dCmdArgs...))
 	} else {
 		dCmdArgs := []string{dCmd, "-r", locationSource, locationDestination}
-		runBashCmd(exec.Command(cmdName, dCmdArgs...))
+		scpStatus = runBashCmd(exec.Command(cmdName, dCmdArgs...))
 	}
 	// TODO: Verify that the command ran & Return the the output
 	return "EXEC"
 }
+*/
 
 // DmRestart will restart a node
 //

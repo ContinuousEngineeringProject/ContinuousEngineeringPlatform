@@ -46,7 +46,7 @@ func TestDmStopToReturnSingleNodeIsStopped (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
-			nodeStatus := DmStop(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			nodeStatus := DmStop(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
 			if nodeStatus != "Stopped" {
 				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Stopped got", nodeStatus,)
 			}
@@ -58,9 +58,9 @@ func TestDmStartToReturnSingleNodeIsStarted (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
-			nodeStatus := DmStart(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			nodeStatus := DmStart(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
 			if nodeStatus != "Running" {
-				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(testIteration+1), "expected Running got", nodeStatus,)
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Running got", nodeStatus,)
 			}
 		}
 	}
@@ -70,35 +70,27 @@ func TestDmRestartToReturnSingleNodeIsRestarted(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
-			nodeStatus := DmRestart(testNodeData[node].PREFIX + strconv.Itoa(node+1))
+			nodeStatus := DmRestart(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
 			if nodeStatus != "Running" {
-				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(testIteration+1), "expected Running got", nodeStatus,)
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected Running got", nodeStatus,)
 			}
 		}
 	}
 }
 
-func TestDmSSH(t *testing.T) {
+func TestDmSSHToReturnSshToSingleNode(t *testing.T) {
 	testNodeData := createTestNodeData()
-	for i := 0; i < len(testNodeData); i++ {
-		for n := 0; n < testNodeData[i].COUNT; n++ {
-
-		}
-
-		nodeStatus := DmCreate(testNodeData[i], testNodeData[i].PREFIX + strconv.Itoa(i+1))
-		if nodeStatus == "Running" {
-			sshOutput := DmSSH(testNodeData[i].PREFIX + strconv.Itoa(i+1),"ls")
-			if sshOutput != "EXEC" { //TODO: needs to be the expected return value from the ssh
-				t.Error("Failed to ssh to ", testNodeData[i].PREFIX + strconv.Itoa(i+1), "expected EXEC got", sshOutput,)
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			sshOutput := DmSSH(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1),"echo test")
+			if sshOutput != "test" {
+				t.Error("Failed to ssh to", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected", "test", "got", sshOutput,)
 			}
-		} else {
-			t.Error("Failed to create", testNodeData[i].PREFIX + strconv.Itoa(i+1),)
 		}
 	}
-	// Remove node(s) created during the test
-	removeTestNodes(testNodeData)
 }
 
+/*
 func TestDmSCP(t *testing.T) {
 	// TODO: Refactor to include multiple source & dest locations
 	testNodeData := createTestNodeData()
@@ -120,6 +112,7 @@ func TestDmSCP(t *testing.T) {
 	// Remove node(s) created during the test
 	removeTestNodes(testNodeData)
 }
+*/
 
 func TestDmRemoveToReturnSingleNodeIsRemoved (t *testing.T) {
 	testNodeData := createTestNodeData()
