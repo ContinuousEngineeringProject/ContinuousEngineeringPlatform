@@ -122,3 +122,15 @@ func DmRestart(nodeName string) (status string){
 
 	return DmStatus(nodeName)
 }
+
+// DmIp will return the IP of a node
+//
+func DmIp(nodeName string) (nodeIp string){
+	dCmd := "ip"
+	dCmdAgrs := []string{dCmd, nodeName}
+
+	nodeIp = runBashCmd(exec.Command(cmdName, dCmdAgrs...))
+	fmt.Fprintln(os.Stderr, nodeName+" IP is "+nodeIp)
+
+	return
+}
