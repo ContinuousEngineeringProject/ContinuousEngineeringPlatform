@@ -5,14 +5,14 @@ import (
 	"strconv"
 )
 
-func removeTestNodes(testNodeData []ArgsCreateNode){
+func removeTestNodes(testNodeData []ArgCreateNode){
 	for i := 0; i < len(testNodeData); i++ {
 		DmRemove(testNodeData[i].PREFIX)
 	}
 }
 
-func createTestNodeData() []ArgsCreateNode {
-	var argsTestNodes = []ArgsCreateNode{
+func createTestNodeData() []ArgCreateNode {
+	var argsTestNodes = []ArgCreateNode{
 		{"TestVBNode","virtualbox","1024","1",1},
 	}
 	return argsTestNodes
@@ -93,7 +93,7 @@ func TestDmSSHToReturnSshToNode(t *testing.T) {
 /*
 func TestDmSCP(t *testing.T) {
 	// TODO: Refactor to include multiple source & dest locations
-	testNodeData := createTestNodeData()
+	testNodeData := createTestSwarmData()
 	for i := 0; i < len(testNodeData); i++ {
 		for n := 0; n < testNodeData[i].COUNT; n++ {
 
