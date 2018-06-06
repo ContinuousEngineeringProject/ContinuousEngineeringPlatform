@@ -6,14 +6,17 @@ import (
 	"strconv"
 )
 
-func createTestNodeData() []bash.ArgsCreateNode {
-	var argsTestNodes = []bash.ArgsCreateNode{
-		{"TestVBNode","virtualbox","1024","1",2},
+func createTestNodeData() []bash.ArgCreateNode {
+	var argsTestNodes = []bash.ArgCreateNode{
+//		{"TestVBNode","virtualbox","1024","1",4},
+		{"cdp-node-M","virtualbox","2048","2",1},
+		{"cdp-node-W","virtualbox","1024","1",2},
+
 	}
 	return argsTestNodes
 }
 
-func createTestNodeNameList(testNodeData bash.ArgsCreateNode) (testNodeNames []string) {
+func createTestNodeNameList(testNodeData bash.ArgCreateNode) (testNodeNames []string) {
 	testNodeNames = make([]string,testNodeData.COUNT)
 	for i := 0; i < testNodeData.COUNT; i++ {
 		testNodeNames[i] = testNodeData.PREFIX + strconv.Itoa(i+1)

@@ -5,20 +5,20 @@ import (
 	"strconv"
 )
 
-func removeTestNodes(testNodeData []ArgsCreateNode){
+func removeTestNodes(testNodeData []ArgCreateNode){
 	for i := 0; i < len(testNodeData); i++ {
 		DmRemove(testNodeData[i].PREFIX)
 	}
 }
 
-func createTestNodeData() []ArgsCreateNode {
-	var argsTestNodes = []ArgsCreateNode{
+func createTestNodeData() []ArgCreateNode {
+	var argsTestNodes = []ArgCreateNode{
 		{"TestVBNode","virtualbox","1024","1",1},
 	}
 	return argsTestNodes
 }
 
-func TestDmCreateToReturnCreateSingleRunningNode(t *testing.T) {
+func TestDmCreateToReturnCreateRunningNode(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -30,7 +30,7 @@ func TestDmCreateToReturnCreateSingleRunningNode(t *testing.T) {
 	}
 }
 
-func TestDmStatusToReturnStatusOfSingleRunningNode(t *testing.T) {
+func TestDmStatusToReturnStatusOfRunningNode(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -42,7 +42,7 @@ func TestDmStatusToReturnStatusOfSingleRunningNode(t *testing.T) {
 	}
 }
 
-func TestDmStopToReturnSingleNodeIsStopped (t *testing.T) {
+func TestDmStopToReturnNodeIsStopped (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -54,7 +54,7 @@ func TestDmStopToReturnSingleNodeIsStopped (t *testing.T) {
 	}
 }
 
-func TestDmStartToReturnSingleNodeIsStarted (t *testing.T) {
+func TestDmStartToReturnNodeIsStarted (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -66,7 +66,7 @@ func TestDmStartToReturnSingleNodeIsStarted (t *testing.T) {
 	}
 }
 
-func TestDmRestartToReturnSingleNodeIsRestarted(t *testing.T) {
+func TestDmRestartToReturnNodeIsRestarted(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -78,7 +78,7 @@ func TestDmRestartToReturnSingleNodeIsRestarted(t *testing.T) {
 	}
 }
 
-func TestDmSSHToReturnSshToSingleNode(t *testing.T) {
+func TestDmSSHToReturnSshToNode(t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
@@ -93,7 +93,7 @@ func TestDmSSHToReturnSshToSingleNode(t *testing.T) {
 /*
 func TestDmSCP(t *testing.T) {
 	// TODO: Refactor to include multiple source & dest locations
-	testNodeData := createTestNodeData()
+	testNodeData := createTestSwarmData()
 	for i := 0; i < len(testNodeData); i++ {
 		for n := 0; n < testNodeData[i].COUNT; n++ {
 
@@ -114,7 +114,19 @@ func TestDmSCP(t *testing.T) {
 }
 */
 
-func TestDmRemoveToReturnSingleNodeIsRemoved (t *testing.T) {
+func TestDmIpToReturnNodeIp(t *testing.T) {
+	testNodeData := createTestNodeData()
+	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
+		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
+			nodeIp := DmIp(testNodeData[testIteration].PREFIX + strconv.Itoa(node+1))
+			if nodeIp != "192.168.99.100" {
+				t.Error("For", testNodeData[testIteration].PREFIX + strconv.Itoa(node+1), "expected", "192.168.99.100", "got", nodeIp,)
+			}
+		}
+	}
+}
+
+func TestDmRemoveToReturnNodeIsRemoved (t *testing.T) {
 	testNodeData := createTestNodeData()
 	for testIteration := 0; testIteration < len(testNodeData); testIteration++ {
 		for node := 0; node < testNodeData[testIteration].COUNT; node++ {
