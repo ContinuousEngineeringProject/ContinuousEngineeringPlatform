@@ -8,7 +8,10 @@ import (
 
 func createTestNodeData() []bash.ArgCreateNode {
 	var argsTestNodes = []bash.ArgCreateNode{
-		{"TestVBNode","virtualbox","1024","1",2},
+//		{"TestVBNode","virtualbox","1024","1",4},
+		{"cdp-node-M","virtualbox","2048","2",1},
+		{"cdp-node-W","virtualbox","1024","1",2},
+
 	}
 	return argsTestNodes
 }

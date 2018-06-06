@@ -1,8 +1,19 @@
-FROM golang:1.9.2-alpine3.6 AS BUILD
+FROM golang:1.10 AS BUILD
 
-WORKDIR /legion
+WORKDIR /cePlatform
 
-#TODO: need to build the go app as
+#TODO: need to build the go app
 # Now just add the binary
-ADD mylegion /legion/
-ENTRYPOINT ["./mylegion"]
+ADD myOminus /Ominus/
+ENTRYPOINT ["./myOminus"]
+
+
+
+
+# WORKDIR /go/src/app
+# COPY . .
+
+# RUN go get -d -v ./...
+# RUN go install -v ./...
+
+# CMD ["app"]
