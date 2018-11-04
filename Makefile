@@ -1,6 +1,6 @@
 #TODO: create the makefile
 
-test: build ## run the unit &integration test
+test: build ## run the unit & integration test
 
 
 test-integration: build ## run the integration tests

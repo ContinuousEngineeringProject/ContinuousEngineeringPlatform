@@ -59,13 +59,6 @@
 	# Thank you!
 
 #		people = [
-			# David Calavera contributed many features to Docker, such as an improved
-			# event system, dynamic configuration reloading, volume plugins, fancy
-			# new templating options, and an external client credential store. As a
-			# maintainer, David was release captain for Docker 1.8, and competing
-			# with Jess Frazelle to be "top dream killer".
-			# David is now doing amazing stuff as CTO for https://www.netlify.com,
-			# and tweets as @calavera.
 			"?????"
 #		]
 

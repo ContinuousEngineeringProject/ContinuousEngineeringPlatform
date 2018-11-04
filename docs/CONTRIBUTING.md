@@ -22,7 +22,7 @@ We are always thrilled to receive pull requests. We do our best to process them 
 
 You can propose new designs for existing features. You can also design entirely new features. We really appreciate contributors who want to refactor or otherwise cleanup our project.
 
-<!--
+
 ### Connect with other Continuous Engineering Platform contributors
 
 <table class="tg">
@@ -50,20 +50,17 @@ You can propose new designs for existing features. You can also design entirely 
   <tr>
     <td>Twitter</td>
     <td>
-      You can follow <a href="https://twitter.com/moby/" target="_blank">Moby Project Twitter feed</a>
-      to get updates on our products. You can also tweet us questions or just
-      share blogs or stories.
+      You can follow <a href="https://twitter.com/moby/" target="_blank">Moby Project Twitter feed</a> to get updates on our products. You can also tweet us questions or just share blogs or stories.
     </td>
   </tr>
 </table>
--->
 
 ### Conventions
 
 Fork the repository and make changes on your fork in a feature branch:
 
-- If it's a bug fix branch, name it XXXX-something where XXXX is the number of the issue. 
-- If it's a feature branch, create an enhancement issue to announce your intentions, and name it XXXX-something where XXXX is the number of the issue.
+- If it's a bug fix branch, name it XXXX-bug where XXXX is the number of the issue. 
+- If it's a feature branch, create an enhancement issue to announce your intentions, and name it XXXX-feature where XXXX is the number of the issue.
 
 Submit tests for your changes. See [TESTING.md][Testing] for details.
 

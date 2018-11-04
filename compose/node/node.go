@@ -1,16 +1,15 @@
 package node
 
 import (
-	"github.com/ContinuousEngineeringProject/cePlatform/docker/bash"
 	"fmt"
+	"github.com/ContinuousEngineeringProject/cePlatform/docker/bash"
 	"os"
 	"strconv"
 )
 
-
 // CreateNodes will create multiple nodes
 //
-func CreateNodes(nodeConfig bash.ArgCreateNode) (nodesStatus []bash.NodeDetails){
+func CreateNodes(nodeConfig bash.ArgCreateNode) (nodesStatus []bash.NodeDetails) {
 	fmt.Fprintln(os.Stderr, "Creating "+strconv.Itoa(nodeConfig.COUNT)+" nodes")
 
 	nodesStatus = make([]bash.NodeDetails, nodeConfig.COUNT)
@@ -34,7 +33,7 @@ func CreateNodes(nodeConfig bash.ArgCreateNode) (nodesStatus []bash.NodeDetails)
 
 // StopNodes will stop multiple nodes
 //
-func StopNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
+func StopNodes(nodeNames []string) (nodesStatus []bash.NodeDetails) {
 	fmt.Fprintln(os.Stderr, "Stopping "+strconv.Itoa(len(nodeNames))+" nodes")
 
 	nodesStatus = make([]bash.NodeDetails, len(nodeNames))
@@ -47,7 +46,7 @@ func StopNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
 
 // StartNodes will start multiple stopped nodes
 //
-func StartNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
+func StartNodes(nodeNames []string) (nodesStatus []bash.NodeDetails) {
 	fmt.Fprintln(os.Stderr, "Starting "+strconv.Itoa(len(nodeNames))+" nodes")
 
 	nodesStatus = make([]bash.NodeDetails, len(nodeNames))
@@ -55,12 +54,12 @@ func StartNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
 		nodesStatus[node].NODE = nodeNames[node]
 		nodesStatus[node].STATUS = bash.DmStart(nodeNames[node])
 	}
-	return 
+	return
 }
 
 // RemoveNodes will remove multiple nodes
 //
-func RemoveNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
+func RemoveNodes(nodeNames []string) (nodesStatus []bash.NodeDetails) {
 	fmt.Fprintln(os.Stderr, "Removing "+strconv.Itoa(len(nodeNames))+" nodes")
 
 	nodesStatus = make([]bash.NodeDetails, len(nodeNames))
@@ -73,7 +72,7 @@ func RemoveNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
 
 // RestartNodes will start multiple stopped nodes
 //
-func RestartNodes(nodeNames []string) (nodesStatus []bash.NodeDetails){
+func RestartNodes(nodeNames []string) (nodesStatus []bash.NodeDetails) {
 	fmt.Fprintln(os.Stderr, "Restarting "+strconv.Itoa(len(nodeNames))+" nodes")
 
 	nodesStatus = make([]bash.NodeDetails, len(nodeNames))

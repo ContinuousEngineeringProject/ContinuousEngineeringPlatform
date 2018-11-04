@@ -4,8 +4,8 @@ WORKDIR /cePlatform
 
 #TODO: need to build the go app
 # Now just add the binary
-ADD myOminus /Ominus/
-ENTRYPOINT ["./myOminus"]
+ADD cePlatform /cePlatform/
+ENTRYPOINT ["./cePlatform"]
 
 
 
